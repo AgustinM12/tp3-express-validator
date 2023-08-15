@@ -1,0 +1,35 @@
+<%- include ('partials/header', {tituloWeb: 'Lista de Reservas' }) -%>
+
+    <div class="container">
+
+        <div class="row mt-5">
+            <h1 class="text-center border-botton">Lista de Reservas</h1>
+            <div class="col">
+                <div class="col-md-3 mb-2">
+                    <a href="/api/nueva-reserva" class="btn btn sm btn-primary" id>Nuevo </a>
+                    <a href="#" class="btn btn-info text-light">Inicio</a>
+                </div>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <td>Codigo</td>
+                            <td>Nombre</td>
+                            <td>Apellido</td>
+                            <td>DNI</td>
+                            <td>Nro. Telefono</td>
+                            <td>Fecha de salida</td>
+                            <td>Fecha de llegada</td>
+                            <td>Costo</td>
+                            <td>Opciones</td>
+                        </tr>
+                    </thead>
+                    <tbody id="listaDeReservas">
+          
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+<script src="/js/mostrar-usuarios.js"></script>
+    <%- include('partials/footer') %>
