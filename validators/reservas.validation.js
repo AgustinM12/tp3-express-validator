@@ -1,27 +1,17 @@
 const { check } = require("express-validator")
-
-const { validationResult } = require("../helpers/validateHealper")
+const { validateSchema } = require("../helpers/validateHealper")
 
 const validateCreate = [
 check("nombre")
-.exists()
-.not()
-.isEmpty(),
+.exists(),
 
 check("costo")
 .exists()
-.isNumeric(),
-
-check("email")
-.exists()
-.isEmail(),
+.isNumeric().withMessage("El costo debe ser un valor numerico"),
 
 (req, res, next) =>{
-validationResult(req, res, next)
+    validateSchema(req, res, next)
 }
-
 ]
 
-module.exports = {
-    validateCreate
-}
+module.exports = { validateCreate }

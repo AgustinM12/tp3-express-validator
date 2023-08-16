@@ -22,24 +22,17 @@ formNuevaReserva.addEventListener('submit', async (e) => {
     }
 
 
+try{
+
     const respuesta = await fetch('/api/nueva-reserva', {
         method: 'POST',
         body: JSON.stringify(usuario),
         headers: {
             'Content-Type': 'application/json'
         }
+        
     });
-
-
-    if (respuesta.status !== 201) {
-        return Swal.fire({
-            title: '¡Error!',
-            text: 'Hubo un error al momento de crear la reserva',
-            icon: 'error',
-            confirmButtonText: 'Aceptar'
-        });
-    }
-
+    
     const datos = await respuesta.json()
 
     Swal.fire({
@@ -52,5 +45,28 @@ formNuevaReserva.addEventListener('submit', async (e) => {
     setTimeout(()=> {
         window.location.href = '/api'
     }, 1500)
+
+}catch(error){
+
+
+  
+        return Swal.fire({
+            title: '¡Error!',
+            text: error.message,
+            icon: 'error',
+            confirmButtonText: 'Aceptar'
+        });
+  
+
+
+}
+
+
+
+
+
+
+
+
 
 });

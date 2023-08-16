@@ -1,6 +1,7 @@
 // TODO: Importar el modelo y controladores de reservas, luego vincular rutas con controladores
 
 const router = require('express').Router();
+const { validateCreate } = require("../validators/reservas.validation")
 
 const {
 RenderObtenerReservas,
@@ -36,7 +37,7 @@ router.get('/actualizar-reserva/:id', RenderEditarReservas)
 router.get('/app/', obtenerReservas);
  
 // Crear una reserva
-router.post('/nueva-reserva', crearReserva);
+router.post('/nueva-reserva', validateCreate, crearReserva);
 
 router.get('/app/:id', obtenerUnaReserva);
  
