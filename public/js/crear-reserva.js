@@ -21,52 +21,51 @@ formNuevaReserva.addEventListener('submit', async (e) => {
         costo
     }
 
+    try {
 
-try{
+        const respuesta = await fetch('/api/nueva-reserva', {
+            method: 'POST',
+            body: JSON.stringify(usuario),
+            headers: {
+                'Content-Type': 'application/json'
+            }
 
-    const respuesta = await fetch('/api/nueva-reserva', {
-        method: 'POST',
-        body: JSON.stringify(usuario),
-        headers: {
-            'Content-Type': 'application/json'
+        });
+
+        const datos = await respuesta.json()
+
+        if (respuesta.ok) {
+
+            Swal.fire({
+                title: '¡Reserva creada exitosamente!',
+                text: datos.message,
+                icon: 'success',
+                confirmButtonText: 'Aceptar'
+            });
+
+            setTimeout(() => {
+                window.location.href = '/api'
+            }, 1500)
+
+        } else {
+            let errorMessage = datos.errors
+
+            return Swal.fire({
+                title: '¡Error!',
+                text: errorMessage,
+                icon: 'error',
+                confirmButtonText: 'Aceptar'
+            });
         }
-        
-    });
-    
-    const datos = await respuesta.json()
 
-    Swal.fire({
-        title: '¡Reserva creada exitosamente!',
-        text: datos.message,
-        icon: 'success',
-        confirmButtonText: 'Aceptar'
-    });
+    } catch (error) {
+        console.log(error);
 
-    setTimeout(()=> {
-        window.location.href = '/api'
-    }, 1500)
-
-}catch(error){
-
-
-  
         return Swal.fire({
             title: '¡Error!',
-            text: error.message,
+            text: 'Hubo un error al procesar la solicitud catch',
             icon: 'error',
             confirmButtonText: 'Aceptar'
         });
-  
-
-
-}
-
-
-
-
-
-
-
-
-
+    }
 });

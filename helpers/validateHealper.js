@@ -8,8 +8,11 @@ const validateSchema = (req, res, next) => {
         // return res.status(400).json({ errors: errors.array() })
 
         const errorMessages = errors.array().map(error => error.msg);
-        const errorMessage = errorMessages.join(', ');
-        return res.status(400).send(errorMessage);
+        return res.status(400).json({ errors: errorMessages });
+
+
+        // return res.status(400).send(errorMessage);
+        
     }
 
     next();
